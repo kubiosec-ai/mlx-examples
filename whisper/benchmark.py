@@ -8,6 +8,7 @@ import time
 import mlx.core as mx
 
 from whisper import audio, decoding, load_models, transcribe
+from security import safe_command
 
 audio_file = "whisper/assets/ls_test.flac"
 
@@ -89,8 +90,7 @@ if __name__ == "__main__":
             print(
                 f"\nDidn't find the MLX-format {model_name} model in the folder {args.mlx_dir}. Lauching conversion"
             )
-            subprocess.run(
-                f"python convert.py --torch-name-or-path {model_name} --mlx-path {model_path}",
+            safe_command.run(subprocess.run, f"python convert.py --torch-name-or-path {model_name} --mlx-path {model_path}",
                 shell=True,
             )
 
