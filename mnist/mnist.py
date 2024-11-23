@@ -6,6 +6,7 @@ import pickle
 from urllib import request
 
 import numpy as np
+import fickling
 
 
 def mnist(
@@ -50,7 +51,7 @@ def mnist(
     if not os.path.exists(save_file):
         download_and_save(save_file)
     with open(save_file, "rb") as f:
-        mnist = pickle.load(f)
+        mnist = fickling.load(f)
 
     def preproc(x):
         return x.astype(np.float32) / 255.0
